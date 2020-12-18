@@ -38,7 +38,7 @@ export const Popover = forwardRef<HTMLElement, PopoverProps>(
       contentLocation,
       boundaryInset = 0,
       onClickOutside,
-      childrenRef,
+      childrenRef = null,
       isChildrenRefPassed = false
     },
     externalRef,
@@ -50,7 +50,7 @@ export const Popover = forwardRef<HTMLElement, PopoverProps>(
     const prevContentLocation = useRef<ContentLocation | ContentLocationGetter | undefined>();
     const prevReposition = useRef(reposition);
 
-    let childRef = useRef<HTMLElement>();
+    const childRef = useRef<HTMLElement>();
 
     const [popoverState, setPopoverState] = useState<PopoverState>({
       isPositioned: false,
@@ -201,11 +201,12 @@ export const Popover = forwardRef<HTMLElement, PopoverProps>(
       };
     }, [handleOnClickOutside, handleWindowResize]);
 
-    useLayoutEffect(() => {
-      if( isChildrenRefPassed){
-        childRef= childrenRef
-      }
-    }, []);
+    if(childrenRef &&  isChildrenRefPassed){
+      useLayoutEffect(() => {
+          childRef.current = childrenRef.current;
+      }, [childrenRef.current]);
+    }
+   
 
     const handleRef = useCallback(
       (node: HTMLElement) => {
