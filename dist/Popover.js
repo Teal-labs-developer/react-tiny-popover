@@ -42,14 +42,14 @@ Object.defineProperty(exports, "useArrowContainer", { enumerable: true, get: fun
 var ArrowContainer_1 = require("./ArrowContainer");
 Object.defineProperty(exports, "ArrowContainer", { enumerable: true, get: function () { return ArrowContainer_1.ArrowContainer; } });
 exports.Popover = react_1.forwardRef(function (_a, externalRef) {
-    var isOpen = _a.isOpen, children = _a.children, content = _a.content, _b = _a.positions, externalPositions = _b === void 0 ? util_1.Constants.DEFAULT_POSITIONS : _b, _c = _a.align, align = _c === void 0 ? util_1.Constants.DEFAULT_ALIGN : _c, _d = _a.padding, padding = _d === void 0 ? 0 : _d, _e = _a.reposition, reposition = _e === void 0 ? true : _e, _f = _a.containerParent, containerParent = _f === void 0 ? window.document.body : _f, _g = _a.containerClassName, containerClassName = _g === void 0 ? 'react-tiny-popover-container' : _g, containerStyle = _a.containerStyle, contentLocation = _a.contentLocation, _h = _a.boundaryInset, boundaryInset = _h === void 0 ? 0 : _h, onClickOutside = _a.onClickOutside;
+    var isOpen = _a.isOpen, children = _a.children, content = _a.content, _b = _a.positions, externalPositions = _b === void 0 ? util_1.Constants.DEFAULT_POSITIONS : _b, _c = _a.align, align = _c === void 0 ? util_1.Constants.DEFAULT_ALIGN : _c, _d = _a.padding, padding = _d === void 0 ? 0 : _d, _e = _a.reposition, reposition = _e === void 0 ? true : _e, _f = _a.containerParent, containerParent = _f === void 0 ? window.document.body : _f, _g = _a.containerClassName, containerClassName = _g === void 0 ? 'react-tiny-popover-container' : _g, containerStyle = _a.containerStyle, contentLocation = _a.contentLocation, _h = _a.boundaryInset, boundaryInset = _h === void 0 ? 0 : _h, onClickOutside = _a.onClickOutside, childrenRef = _a.childrenRef, _j = _a.isChildrenRefPassed, isChildrenRefPassed = _j === void 0 ? false : _j;
     var positions = useMemoizedArray_1.useMemoizedArray(externalPositions);
     // TODO: factor prevs out into a custom prevs hook
     var prevPositions = react_1.useRef();
     var prevContentLocation = react_1.useRef();
     var prevReposition = react_1.useRef(reposition);
     var childRef = react_1.useRef();
-    var _j = react_1.useState({
+    var _k = react_1.useState({
         isPositioned: false,
         align: align,
         nudgedLeft: 0,
@@ -60,9 +60,9 @@ exports.Popover = react_1.forwardRef(function (_a, externalRef) {
         popoverRect: util_1.Constants.EMPTY_CLIENT_RECT,
         parentRect: util_1.Constants.EMPTY_CLIENT_RECT,
         boundaryInset: boundaryInset,
-    }), popoverState = _j[0], setPopoverState = _j[1];
+    }), popoverState = _k[0], setPopoverState = _k[1];
     var onPositionPopover = react_1.useCallback(function (popoverState) { return setPopoverState(popoverState); }, []);
-    var _k = usePopover_1.usePopover({
+    var _l = usePopover_1.usePopover({
         childRef: childRef,
         containerClassName: containerClassName,
         containerParent: containerParent,
@@ -73,7 +73,7 @@ exports.Popover = react_1.forwardRef(function (_a, externalRef) {
         boundaryInset: boundaryInset,
         reposition: reposition,
         onPositionPopover: onPositionPopover,
-    }), positionPopover = _k[0], popoverRef = _k[1];
+    }), positionPopover = _l[0], popoverRef = _l[1];
     react_1.useLayoutEffect(function () {
         var shouldUpdate = true;
         var updatePopover = function () {
@@ -173,6 +173,11 @@ exports.Popover = react_1.forwardRef(function (_a, externalRef) {
             window.removeEventListener('resize', handleWindowResize);
         };
     }, [handleOnClickOutside, handleWindowResize]);
+    react_1.useLayoutEffect(function () {
+        if (childrenRef.current && isChildrenRefPassed) {
+            childRef.current = childrenRef.current;
+        }
+    }, [childrenRef.current]);
     var handleRef = react_1.useCallback(function (node) {
         childRef.current = node;
         if (externalRef != null) {
@@ -194,8 +199,9 @@ exports.Popover = react_1.forwardRef(function (_a, externalRef) {
             return null;
         return (react_1.default.createElement(PopoverPortal_1.PopoverPortal, { element: popoverRef.current, container: containerParent }, typeof content === 'function' ? content(popoverState) : content));
     };
+    // if user has passed childrenRef then No need to render child component from popover
     return (react_1.default.createElement(react_1.default.Fragment, null,
-        renderChild(),
+        !isChildrenRefPassed && renderChild(),
         renderPopover()));
 });
 //# sourceMappingURL=Popover.js.map
