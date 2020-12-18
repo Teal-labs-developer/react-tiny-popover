@@ -174,10 +174,10 @@ exports.Popover = react_1.forwardRef(function (_a, externalRef) {
         };
     }, [handleOnClickOutside, handleWindowResize]);
     react_1.useLayoutEffect(function () {
-        if (childrenRef.current && isChildrenRefPassed) {
-            childRef.current = childrenRef.current;
+        if (isChildrenRefPassed) {
+            childRef = childrenRef;
         }
-    }, [childrenRef.current]);
+    }, []);
     var handleRef = react_1.useCallback(function (node) {
         childRef.current = node;
         if (externalRef != null) {
