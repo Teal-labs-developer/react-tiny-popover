@@ -39,7 +39,7 @@ export const Popover = forwardRef<HTMLElement, PopoverProps>(
       boundaryInset = 0,
       onClickOutside,
       childrenRef = null,
-      isChildrenRefPassed = false
+      isChildrenRefPassed = false,
     },
     externalRef,
   ) => {
@@ -189,7 +189,7 @@ export const Popover = forwardRef<HTMLElement, PopoverProps>(
     );
 
     const handleWindowResize = useCallback(() => {
-      window.requestAnimationFrame(positionPopover);
+      window.requestAnimationFrame(() => positionPopover());
     }, [positionPopover]);
 
     useEffect(() => {
@@ -201,12 +201,11 @@ export const Popover = forwardRef<HTMLElement, PopoverProps>(
       };
     }, [handleOnClickOutside, handleWindowResize]);
 
-    if(childrenRef &&  isChildrenRefPassed){
+    if (childrenRef && isChildrenRefPassed) {
       useLayoutEffect(() => {
-          childRef.current = childrenRef.current;
+        childRef.current = childrenRef.current;
       }, [childrenRef.current]);
     }
-   
 
     const handleRef = useCallback(
       (node: HTMLElement) => {
@@ -235,10 +234,10 @@ export const Popover = forwardRef<HTMLElement, PopoverProps>(
         </PopoverPortal>
       );
     };
-// if user has passed childrenRef then No need to render child component from popover
+    // if user has passed childrenRef then No need to render child component from popover
     return (
       <>
-        {!isChildrenRefPassed && renderChild()}    
+        {!isChildrenRefPassed && renderChild()}
         {renderPopover()}
       </>
     );
