@@ -163,7 +163,7 @@ exports.Popover = react_1.forwardRef(function (_a, externalRef) {
         }
     }, [isOpen, onClickOutside, popoverRef]);
     var handleWindowResize = react_1.useCallback(function () {
-        window.requestAnimationFrame(positionPopover);
+        window.requestAnimationFrame(function () { return positionPopover(); });
     }, [positionPopover]);
     react_1.useEffect(function () {
         window.addEventListener('click', handleOnClickOutside);

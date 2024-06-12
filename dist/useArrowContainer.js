@@ -13,7 +13,7 @@ var __assign = (this && this.__assign) || function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.useArrowContainer = void 0;
 var react_1 = require("react");
-var useArrowContainer = function (_a) {
+exports.useArrowContainer = function (_a) {
     var childRect = _a.childRect, popoverRect = _a.popoverRect, position = _a.position, arrowSize = _a.arrowSize, arrowColor = _a.arrowColor;
     var arrowContainerStyle = react_1.useMemo(function () {
         return ({
@@ -88,5 +88,4 @@ var useArrowContainer = function (_a) {
         arrowStyle: arrowStyle,
     };
 };
-exports.useArrowContainer = useArrowContainer;
 //# sourceMappingURL=useArrowContainer.js.map

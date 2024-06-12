@@ -67,8 +67,8 @@ export interface PopoverProps {
   boundaryInset?: number;
   boundaryTolerance?: number;
   onClickOutside?: (e: MouseEvent) => void;
-  childrenRef: React.MutableRefObject<HTMLElement>;
-  isChildrenRefPassed: boolean;
+  childrenRef?: React.MutableRefObject<HTMLElement>;
+  isChildrenRefPassed?: boolean;
 }
 
 export type PositionPopover = (

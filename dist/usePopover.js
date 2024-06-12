@@ -4,7 +4,7 @@ exports.usePopover = void 0;
 var react_1 = require("react");
 var util_1 = require("./util");
 var useElementRef_1 = require("./useElementRef");
-var usePopover = function (_a) {
+exports.usePopover = function (_a) {
     var childRef = _a.childRef, positions = _a.positions, containerClassName = _a.containerClassName, containerParent = _a.containerParent, contentLocation = _a.contentLocation, align = _a.align, padding = _a.padding, reposition = _a.reposition, boundaryInset = _a.boundaryInset, onPositionPopover = _a.onPositionPopover;
     var popoverRef = useElementRef_1.useElementRef(containerClassName, {
         position: 'fixed',
@@ -105,5 +105,4 @@ var usePopover = function (_a) {
     ]);
     return [positionPopover, popoverRef];
 };
-exports.usePopover = usePopover;
 //# sourceMappingURL=usePopover.js.map
