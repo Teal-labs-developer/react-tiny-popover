@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.useMemoizedArray = void 0;
 var react_1 = require("react");
-var useMemoizedArray = function (externalArray) {
+exports.useMemoizedArray = function (externalArray) {
     var prevArrayRef = react_1.useRef(externalArray);
     var array = react_1.useMemo(function () {
         if (prevArrayRef.current === externalArray)
@@ -21,5 +21,4 @@ var useMemoizedArray = function (externalArray) {
     }, [externalArray]);
     return array;
 };
-exports.useMemoizedArray = useMemoizedArray;
 //# sourceMappingURL=useMemoizedArray.js.map

@@ -18,11 +18,10 @@ exports.Constants = {
         width: 0,
     },
 };
-var arrayUnique = function (array) {
+exports.arrayUnique = function (array) {
     return array.filter(function (value, index, self) { return self.indexOf(value) === index; });
 };
-exports.arrayUnique = arrayUnique;
-var rectsAreEqual = function (rectA, rectB) {
+exports.rectsAreEqual = function (rectA, rectB) {
     return rectA === rectB ||
         ((rectA === null || rectA === void 0 ? void 0 : rectA.bottom) === (rectB === null || rectB === void 0 ? void 0 : rectB.bottom) &&
             (rectA === null || rectA === void 0 ? void 0 : rectA.height) === (rectB === null || rectB === void 0 ? void 0 : rectB.height) &&
@@ -31,8 +30,7 @@ var rectsAreEqual = function (rectA, rectB) {
             (rectA === null || rectA === void 0 ? void 0 : rectA.top) === (rectB === null || rectB === void 0 ? void 0 : rectB.top) &&
             (rectA === null || rectA === void 0 ? void 0 : rectA.width) === (rectB === null || rectB === void 0 ? void 0 : rectB.width));
 };
-exports.rectsAreEqual = rectsAreEqual;
-var popoverStatesAreEqual = function (stateA, stateB) {
+exports.popoverStatesAreEqual = function (stateA, stateB) {
     return stateA === stateB ||
         ((stateA === null || stateA === void 0 ? void 0 : stateA.align) === (stateB === null || stateB === void 0 ? void 0 : stateB.align) &&
             (stateA === null || stateA === void 0 ? void 0 : stateA.nudgedLeft) === (stateB === null || stateB === void 0 ? void 0 : stateB.nudgedLeft) &&
@@ -42,24 +40,21 @@ var popoverStatesAreEqual = function (stateA, stateB) {
             exports.rectsAreEqual(stateA === null || stateA === void 0 ? void 0 : stateA.childRect, stateB === null || stateB === void 0 ? void 0 : stateB.childRect) &&
             (stateA === null || stateA === void 0 ? void 0 : stateA.position) === (stateB === null || stateB === void 0 ? void 0 : stateB.position));
 };
-exports.popoverStatesAreEqual = popoverStatesAreEqual;
-var targetPositionHasChanged = function (oldRect, newRect) {
+exports.targetPositionHasChanged = function (oldRect, newRect) {
     return oldRect === undefined ||
         oldRect.left !== newRect.left ||
         oldRect.top !== newRect.top ||
         oldRect.width !== newRect.width ||
         oldRect.height !== newRect.height;
 };
-exports.targetPositionHasChanged = targetPositionHasChanged;
-var createContainer = function (containerStyle, containerClassName) {
+exports.createContainer = function (containerStyle, containerClassName) {
     var container = window.document.createElement('div');
     if (containerClassName)
         container.className = containerClassName;
     Object.assign(container.style, containerStyle);
     return container;
 };
-exports.createContainer = createContainer;
-var popoverRectForPosition = function (position, childRect, popoverRect, padding, align) {
+exports.popoverRectForPosition = function (position, childRect, popoverRect, padding, align) {
     var targetMidX = childRect.left + childRect.width / 2;
     var targetMidY = childRect.top + childRect.height / 2;
     var width = popoverRect.width, height = popoverRect.height;
@@ -111,8 +106,7 @@ var popoverRectForPosition = function (position, childRect, popoverRect, padding
     }
     return { top: top, left: left, width: width, height: height, right: left + width, bottom: top + height };
 };
-exports.popoverRectForPosition = popoverRectForPosition;
-var getNewPopoverRect = function (_a, boundaryInset) {
+exports.getNewPopoverRect = function (_a, boundaryInset) {
     var position = _a.position, align = _a.align, childRect = _a.childRect, popoverRect = _a.popoverRect, parentRect = _a.parentRect, padding = _a.padding, reposition = _a.reposition;
     var rect = exports.popoverRectForPosition(position, childRect, popoverRect, padding, align);
     var boundaryViolation = reposition &&
@@ -125,8 +119,7 @@ var getNewPopoverRect = function (_a, boundaryInset) {
         boundaryViolation: boundaryViolation,
     };
 };
-exports.getNewPopoverRect = getNewPopoverRect;
-var getNudgedPopoverRect = function (popoverRect, parentRect, boundaryInset) {
+exports.getNudgedPopoverRect = function (popoverRect, parentRect, boundaryInset) {
     var topBoundary = parentRect.top + boundaryInset;
     var leftBoundary = parentRect.left + boundaryInset;
     var rightBoundary = parentRect.right - boundaryInset;
@@ -144,5 +137,4 @@ var getNudgedPopoverRect = function (popoverRect, parentRect, boundaryInset) {
         bottom: top + popoverRect.height,
     };
 };
-exports.getNudgedPopoverRect = getNudgedPopoverRect;
 //# sourceMappingURL=util.js.map

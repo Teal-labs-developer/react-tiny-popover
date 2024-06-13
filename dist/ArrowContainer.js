@@ -33,7 +33,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ArrowContainer = void 0;
 var react_1 = __importStar(require("react"));
 var useArrowContainer_1 = require("./useArrowContainer");
-var ArrowContainer = function (_a) {
+exports.ArrowContainer = function (_a) {
     var childRect = _a.childRect, popoverRect = _a.popoverRect, position = _a.position, arrowColor = _a.arrowColor, arrowSize = _a.arrowSize, externalArrowStyle = _a.arrowStyle, className = _a.className, children = _a.children, externalArrowContainerStyle = _a.style;
     var _b = useArrowContainer_1.useArrowContainer({
         childRect: childRect,
@@ -48,5 +48,4 @@ var ArrowContainer = function (_a) {
         react_1.default.createElement("div", { style: mergedArrowStyle }),
         children));
 };
-exports.ArrowContainer = ArrowContainer;
 //# sourceMappingURL=ArrowContainer.js.map
